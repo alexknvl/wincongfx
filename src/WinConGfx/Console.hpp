@@ -1,6 +1,16 @@
 #ifndef WINCONGFX_CONSOLE_HPP_
 #define WINCONGFX_CONSOLE_HPP_
 
+#ifdef _WIN32
+  #ifdef WINCONGFX_DLL
+    #define WINCONGFX_API __declspec(dllexport)
+  #else
+    #define WINCONGFX_API __declspec(dllimport)
+  #endif
+#else
+  #define WINCONGFX_API
+#endif
+
 namespace WinConGfx {
 
 class Console {
@@ -37,26 +47,26 @@ public:
   };
   
 public:
-  Console();
-  ~Console();
+  WINCONGFX_API Console();
+  WINCONGFX_API ~Console();
 
-  void GetSize(size_t& width, size_t& height) const;
-  void SetSize(size_t width, size_t height);
-  void SetTitle(const std::string& title);
-  void SetCursorVisiblity(bool flag);
+  WINCONGFX_API void GetSize(size_t& width, size_t& height) const;
+  WINCONGFX_API void SetSize(size_t width, size_t height);
+  WINCONGFX_API void SetTitle(const std::string& title);
+  WINCONGFX_API void SetCursorVisiblity(bool flag);
 
-  void Put(size_t x, size_t y, char c);
-  void Put(size_t x, size_t y, BGColor attr);
-  void Put(size_t x, size_t y, FGColor attr);
+  WINCONGFX_API void Put(size_t x, size_t y, char c);
+  WINCONGFX_API void Put(size_t x, size_t y, BGColor attr);
+  WINCONGFX_API void Put(size_t x, size_t y, FGColor attr);
 
-  void Clear();
-  void Clear(size_t top, size_t left, size_t width, size_t height);
-  void Fill(size_t top, size_t left, size_t width, size_t height, BGColor bg, FGColor fg, char c);
+  WINCONGFX_API void Clear();
+  WINCONGFX_API void Clear(size_t top, size_t left, size_t width, size_t height);
+  WINCONGFX_API void Fill(size_t top, size_t left, size_t width, size_t height, BGColor bg, FGColor fg, char c);
 
-  void SwapBuffers();
-  void SwapBuffersFull();
+  WINCONGFX_API void SwapBuffers();
+  WINCONGFX_API void SwapBuffersFull();
 
-  int ReadKey(bool blocking = false);
+  WINCONGFX_API int ReadKey(bool blocking = false);
 
 private:
   struct InternalData;

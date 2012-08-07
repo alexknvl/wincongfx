@@ -30,6 +30,16 @@ solution "windows-console-graphics"
     defines { "NDEBUG" }
     flags { "Optimize" }
   
+  project "SampleApp"
+    kind "ConsoleApp"
+    language "C++"
+    
+    links "WinConGfx"
+    
+    includedirs { "src" }
+    files { "src/SampleApp/**.cpp",
+            "src/SampleApp/**.hpp" }
+  
   project "WinConGfx"
     kind "SharedLib"
     language "C++"
@@ -39,4 +49,3 @@ solution "windows-console-graphics"
     includedirs { "src" }
     files { "src/WinConGfx/**.cpp",
             "src/WinConGfx/**.hpp" }
-    

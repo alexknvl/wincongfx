@@ -90,15 +90,30 @@ void Console::SetCursorVisiblity(bool flag) {
 }
 
 void Console::Put(size_t x, size_t y, char c) {
+  assert(x <= 0x7FFF);
+  assert(y <= 0x7FFF);
+  assert(static_cast<SHORT>(x) < data->screenWidth);
+  assert(static_cast<SHORT>(y) < data->screenHeight);
+
   CHAR_INFO& ci = data->backBuffer[data->screenWidth * y + x];
   ci.Char.AsciiChar = c;
 }
 void Console::Put(size_t x, size_t y, BGColor attr) {
+  assert(x <= 0x7FFF);
+  assert(y <= 0x7FFF);
+  assert(static_cast<SHORT>(x) < data->screenWidth);
+  assert(static_cast<SHORT>(y) < data->screenHeight);
+
   CHAR_INFO& ci = data->backBuffer[data->screenWidth * y + x];
   ci.Attributes &= ~BG_MASK;
   ci.Attributes |= attr;
 }
 void Console::Put(size_t x, size_t y, FGColor attr) {
+  assert(x <= 0x7FFF);
+  assert(y <= 0x7FFF);
+  assert(static_cast<SHORT>(x) < data->screenWidth);
+  assert(static_cast<SHORT>(y) < data->screenHeight);
+
   CHAR_INFO& ci = data->backBuffer[data->screenWidth * y + x];
   ci.Attributes &= ~FG_MASK;
   ci.Attributes |= attr;
