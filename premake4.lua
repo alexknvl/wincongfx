@@ -14,7 +14,15 @@ solution "windows-console-graphics"
   platforms { "x32", "x64" }
 
   location "build"
-  targetdir "bin"
+  
+  for _,arch in pairs({"x32", "x64"}) do
+    for _,conf in pairs({"debug", "release"}) do
+      for _,plat in pairs({"vs2008"}) do
+        configuration { arch, conf, plat }
+          targetdir(path.join("bin", path.join(plat, path.join(arch, conf))))
+      end
+    end
+  end
   
   flags { "FatalWarnings", "ExtraWarnings" }
   
