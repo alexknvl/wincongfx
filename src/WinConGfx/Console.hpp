@@ -15,6 +15,7 @@ namespace WinConGfx {
 
 class Console {
 public:
+  // background colors
   enum BGColor {
     BG_BLACK = 0,
 
@@ -30,6 +31,8 @@ public:
 
     BG_MASK = BG_RED | BG_GREEN | BG_BLUE | BG_INTENSIVE
   };
+  
+  // foreground colors
   enum FGColor {
     FG_BLACK = 0,
 
@@ -50,25 +53,57 @@ public:
   WINCONGFX_API Console();
   WINCONGFX_API ~Console();
 
+  // Returns the size of the console.
   WINCONGFX_API void GetSize(size_t& width, size_t& height) const;
+  
+  // Sets the size of the console.
+  // Width and height must be positive 
+  // and less or equal to 0x7FFF.
   WINCONGFX_API void SetSize(size_t width, size_t height);
+  
+  // Sets the title of the console.
   WINCONGFX_API void SetTitle(const std::string& title);
+  
+  // Changes the cursor visibility.
   WINCONGFX_API void SetCursorVisiblity(bool flag);
 
+  // Puts character at given coordinates.
+  // Coordinates must satisfy 0 <= x < width, 0 <= y < height.
   WINCONGFX_API void Put(size_t x, size_t y, char c);
+  
+  // Changes background color at given coordinates.
+  // Coordinates must satisfy 0 <= x < width, 0 <= y < height.
   WINCONGFX_API void Put(size_t x, size_t y, BGColor attr);
+  
+  // Changes foreground color at given coordinates.
+  // Coordinates must satisfy 0 <= x < width, 0 <= y < height.
   WINCONGFX_API void Put(size_t x, size_t y, FGColor attr);
 
+  // Clears the console.
+  // Is equivalent to Clear(0, 0, width, height).
   WINCONGFX_API void Clear();
+  
+  // Clears a part of the console.
+  // All points being cleared must satisfy 0 <= x < width, 0 <= y < height.
+  // Is equivalent to Fill(0, 0, width, height, BG_BLACK, FG_WHITE, ' ').
   WINCONGFX_API void Clear(size_t top, size_t left, size_t width, size_t height);
+  
+  // Fills a part of the console with the given character and 
+  // sets the background and foreground colors.
   WINCONGFX_API void Fill(size_t top, size_t left, size_t width, size_t height, BGColor bg, FGColor fg, char c);
 
+  // Renders only lines that have been changed.
   WINCONGFX_API void SwapBuffers();
+  
+  // Renders everything.
   WINCONGFX_API void SwapBuffersFull();
-
+  
+  // Reads a key from the console. If blocking is true, waits for one.
   WINCONGFX_API int ReadKey(bool blocking = false);
 
 private:
+  // forward declaration to hide away the implementation and
+  // reduce dependencies (i.e. windows.h)
   struct InternalData;
   InternalData* data;
 };
