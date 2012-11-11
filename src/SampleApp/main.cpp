@@ -3,7 +3,6 @@
 #include <ctime>
 
 #include <WinConGfx/Console.hpp>
-#include <Windows.h>
 
 struct Point {
   size_t x;
