@@ -1,8 +1,8 @@
+#include "Console.hpp"
+
 #include <windows.h>
 #include <vector>
 #include <cassert>
-
-#include "Console.hpp"
 
 namespace WinConGfx {
 
@@ -79,8 +79,8 @@ void Console::SetSize(size_t width, size_t height) {
   ::ReadConsoleOutputA(data->outputHandle, &data->backBuffer[0], 
     dwBufferSize, dwBufferCoord, &srReadRegion);
 }
-void Console::SetTitle(const std::string& title) {
-  ::SetConsoleTitleA(title.c_str());
+void Console::SetTitle(const char* title) {
+  ::SetConsoleTitleA(title);
 }
 void Console::SetCursorVisiblity(bool flag) {
   CONSOLE_CURSOR_INFO cursorInfo;

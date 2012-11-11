@@ -62,7 +62,7 @@ public:
   WINCONGFX_API void SetSize(size_t width, size_t height);
   
   // Sets the title of the console.
-  WINCONGFX_API void SetTitle(const std::string& title);
+  WINCONGFX_API void SetTitle(const char* title);
   
   // Changes the cursor visibility.
   WINCONGFX_API void SetCursorVisiblity(bool flag);
