@@ -13,14 +13,21 @@ int main(int, char**) {
   console.SetSize(80, 25);
   console.SetCursorVisiblity(false);
   
-  // Clear the back buffer.
-  console.Clear();
-  
-  // Draw stuff.
-  console.Fill(0, 0, 10, 10, WinConGfx::Console::BG_BLUE, WinConGfx::Console::FG_YELLOW, '$');
-  
-  // Renders changes.
-  console.SwapBuffers();
+  int counter = 0;
+  while (true) {
+    counter += 1;
+    // Clear the back buffer.
+    console.Clear();
+
+    // Draw stuff.
+    size_t size = counter;
+    console.Fill(0, 0, size, size, WinConGfx::Console::BG_BLUE, WinConGfx::Console::FG_YELLOW, '$');
+
+    // Renders changes.
+    console.SwapBuffers();
+    
+    if (counter == 10) counter = 0;
+  }
 }
 ```
 
