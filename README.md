@@ -23,7 +23,7 @@ int main(int, char**) {
     size_t size = counter;
     console.Fill(0, 0, size, size, WinConGfx::Console::BG_BLUE, WinConGfx::Console::FG_YELLOW, '$');
 
-    // Renders changes.
+    // Render the changes.
     console.SwapBuffers();
     
     if (counter == 10) counter = 0;
@@ -31,4 +31,4 @@ int main(int, char**) {
 }
 ```
 
-See example [here](/blob/master/src/SampleApp/main.cpp).
+See Snake game example [here](/blob/master/src/SampleApp/main.cpp).
